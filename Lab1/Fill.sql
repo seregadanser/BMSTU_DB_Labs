@@ -11,11 +11,7 @@
 --end
 
 BULK INSERT Lab1.dbo.Computer
-FROM 'D:\Labs\DataBase\Lab1\Generator\Computer.csv'
 WITH (DATAFILETYPE = 'char', FIRSTROW = 2, FIELDTERMINATOR = ',', ROWTERMINATOR = '0x0a');
-go
-
-BULK INSERT Lab1.dbo.DataCenter
 FROM 'D:\Labs\DataBase\Lab1\Generator\DataServer.csv'
 WITH (DATAFILETYPE = 'char', FIRSTROW = 2, FIELDTERMINATOR = ',', ROWTERMINATOR = '0x0a');
 go
