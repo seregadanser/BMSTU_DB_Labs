@@ -16,3 +16,5 @@ GO
 EXECUTE ScalarFunc @nam = 'w';
 
 select * from sys.all_columns where name = 'Inn'
+
+select * from INFORMATION_SCHEMA.COLUMNS
