@@ -31,7 +31,12 @@ string ss;
          reader = command.ExecuteReader();
          reader.Read();
          idc = (Int32)reader[0];
+         Int32 index = (Int32)reader[6];
          reader.Close();
+          command = new SqlCommand(@"DELETE Serverr1 WHERE ID = @val;",
+                                  connection);
+          command.Parameters.Add(new SqlParameter("@val", index));
+           command.ExecuteNonQuery();
         command = new SqlCommand(@"select top 1 min(ValueOfComputers), ServerName from Serverr1 group by ServerName, ValueOfComputers order by ValueOfComputers", connection);
      reader = command.ExecuteReader();
       
@@ -55,6 +60,8 @@ string ss;
          command.Parameters.Add(new SqlParameter("@p3", null));
 
          command.ExecuteNonQuery();
+
+        
       }
             }
     }
