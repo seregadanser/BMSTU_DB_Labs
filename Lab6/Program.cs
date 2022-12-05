@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.SqlServer.Server;
 using System.Data.SqlClient;
+using System.Reflection.PortableExecutable;
 
 namespace Lab6
 {
@@ -8,43 +9,84 @@ namespace Lab6
     {
         static void Main(string[] args)
         {
-            string connectionString = "Server=LAPTOPSERGEY;Database=Lab1;Trusted_Connection=True;";
+            string connectionString = "Server=DESKTOP-TPNKBFP;Database=Lab1;Trusted_Connection=True;";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 Console.WriteLine("Подключение открыто");
 
                 SqlCommand command = new SqlCommand();
-                command.CommandText = "SELECT * FROM Sitee";
                 command.Connection = connection;
 
-                //SqlDataReader reader = command.ExecuteReader();
-                //if (reader.HasRows) // если есть данные
-                //{
-                //    // выводим названия столбцов
-                //    string columnName1 = reader.GetName(0);
-                //    string columnName2 = reader.GetName(1);
-                //    string columnName3 = reader.GetName(2);
-                //    string columnName4 = reader.GetName(3);
-                //    string columnName5 = reader.GetName(4);
-                //    string columnName6 = reader.GetName(5);
+                command.CommandText = "SELECT COUNT(*) FROM Sitee";
+                object count = command.ExecuteScalar();
+                Console.WriteLine($"В таблице {count} объектов");
 
-                //    Console.WriteLine($"{columnName1}\t{columnName3}\t{columnName2}\t{columnName3}\t{columnName4}\t{columnName5}");
 
-                //    while (reader.Read()) // построчно считываем данные
-                //    {
-                //        object  id= reader.GetValue(0);
-                //        object name = reader.GetValue(1); 
-                //        object age = reader.GetValue(2);
-                //        object id1 = reader.GetValue(3);
-                //        object name1 = reader.GetValue(4);
-                //        object age1 = reader.GetValue(5);
+                command.CommandText = "select Computer.MemoryValue, Computer.Id, Serverr.ServerName,Serverr.ValueOfComputers,Serverr.ComputerId" +
+                    " from Computer join Serverr on  Serverr.ComputerId = Computer.Id" +
+                " where Computer.Id in (select Computer.Id from Computer right outer join Serverr" +
+                " on Serverr.ComputerId = Computer.Id where Serverr.ValueOfComputers > 12 ) order by Computer.Id";
 
-                //        Console.WriteLine($"{id} \t{name} \t{age}\t{id1} \t{name1} \t{age1}");
-                //    }
+                //command.CommandText = "SELECT * FROM Sitee";
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows) // если есть данные
+                {
+                    // выводим названия столбцов
+                    string columnName1 = reader.GetName(0);
+                    string columnName2 = reader.GetName(1);
+                    string columnName3 = reader.GetName(2);
+                    string columnName4 = reader.GetName(3);
+                    string columnName5 = reader.GetName(4);
+                    Console.WriteLine($"{columnName1}\t{columnName3}\t{columnName2}\t{columnName3}\t{columnName4}\t{columnName5}");
+                    while (reader.Read()) // построчно считываем данные
+                    {
+                        object id = reader.GetValue(0);
+                        object name = reader.GetValue(1);
+                        object age = reader.GetValue(2);
+                        object id1 = reader.GetValue(3);
+                        object name1 = reader.GetValue(4);
+                        Console.WriteLine($"{id} \t{name} \t{age}\t{id1} \t{name1} ");
+                    }
 
-                //}
+                }
+
+            
+
+
             }
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                Console.WriteLine("Подключение открыто");
+
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+
+                command.CommandText = "WITH Sales_CTE (SalesPersonID, SalesOrderID) AS (select AVG(YearProfit) over (partition by Organisation.NameO) as 'avgy'" +
+                               " , Country from Organisation where Country = 'Poland') SELECT * from Sales_CTE";
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows) // если есть данные
+                {
+                    // выводим названия столбцов
+                    string columnName1 = reader.GetName(0);
+                    string columnName2 = reader.GetName(1);
+
+                    Console.WriteLine($"{columnName1}\t{columnName2}");
+                    while (reader.Read()) // построчно считываем данные
+                    {
+                        object id = reader.GetValue(0);
+                        object name = reader.GetValue(1);
+
+                        Console.WriteLine($"{id} \t{name}");
+                    }
+
+                }
+
+
+            }
+           
+
             Console.WriteLine("Подключение закрыто...");
             Console.WriteLine("Программа завершила работу.");
             Console.Read();

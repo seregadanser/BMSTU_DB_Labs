@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "P+R/AKMFvQFS5Zk/wB6vrdI1iS4moaH/P4wmQEmniB4g0C0AdTyg11Chl3Uv5m9rbSn+r66Xjmn288P7gM880g==",
+  "dgSpecHash": "ZFW+s5pCN1vDVNCye2GXnN3rMbUCm8PTq7xbN7G095vIWEZ9rw2e4ciwwLoq3DsqxP8YEQdenDe2go0CTYZXkg==",
   "success": true,
-  "projectFilePath": "D:\\Study\\DataBase\\Lab5\\Lab6\\Lab6.csproj",
+  "projectFilePath": "D:\\Labs\\DataBase\\Lab6\\Lab6.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kalas\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\kalas\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
