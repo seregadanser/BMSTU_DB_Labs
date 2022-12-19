@@ -13,3 +13,11 @@ D:\Study\DataBase\Lab7\obj\Debug\net6.0\refint\Lab7.dll
 D:\Study\DataBase\Lab7\obj\Debug\net6.0\Lab7.pdb
 D:\Study\DataBase\Lab7\obj\Debug\net6.0\Lab7.genruntimeconfig.cache
 D:\Study\DataBase\Lab7\obj\Debug\net6.0\ref\Lab7.dll
+D:\Labs\DataBase\Lab7\obj\Debug\net6.0\Lab7.csproj.AssemblyReference.cache
+D:\Labs\DataBase\Lab7\obj\Debug\net6.0\Lab7.GeneratedMSBuildEditorConfig.editorconfig
+D:\Labs\DataBase\Lab7\obj\Debug\net6.0\Lab7.AssemblyInfoInputs.cache
+D:\Labs\DataBase\Lab7\obj\Debug\net6.0\Lab7.AssemblyInfo.cs
+D:\Labs\DataBase\Lab7\obj\Debug\net6.0\Lab7.csproj.CoreCompileInputs.cache
+D:\Labs\DataBase\Lab7\obj\Debug\net6.0\Lab7.dll
+D:\Labs\DataBase\Lab7\obj\Debug\net6.0\refint\Lab7.dll
+D:\Labs\DataBase\Lab7\obj\Debug\net6.0\Lab7.pdb

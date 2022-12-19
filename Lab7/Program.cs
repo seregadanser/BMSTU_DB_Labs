@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.Linq;
+using System.Data.Linq.Mapping;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
