@@ -15,19 +15,49 @@ using System.Reflection;
 
 namespace Lab7
 {
-    [Table(Name = "Client")]
-    public class ClientTable
+    [Table(Name = "Serverr")]
+    public class ServerTable
     {
         [Column(IsPrimaryKey = true)]
-        public int Clid { get; set; }
+        public int Id { get; set; }
         [Column]
-        public string Clname { get; set; }
+        public int ComputerId { get; set; }
         [Column]
-        public string Clsurname { get; set; }
+        public int ValueOfComputers { get; set; }
         [Column]
-        public string Clphone { get; set; }
+        public int OrganisationId { get; set; }
         [Column]
-        public int Clage { get; set; }
+        public string ServerName { get; set; }
+        [Column]
+        public int Bandwidth { get; set; }
+    }
+    [Table(Name = "Computer")]
+    public class ComputerTable
+    {
+        [Column(IsPrimaryKey = true)]
+        public int Id { get; set; }
+        [Column]
+        public int MemoryValue { get; set; }
+        [Column]
+        public int Furency { get; set; }
+        [Column]
+        public int NumberOfCores { get; set; }
+        [Column]
+        public string CoolType { get; set; }
+    }
+    [Table(Name = "DataCenter")]
+    public class DataCenterTable
+    {
+        [Column(IsPrimaryKey = true, IsDbGenerated = true)]
+        public int Id { get; set; }
+        [Column]
+        public int CostofUsage { get; set; }
+        [Column]
+        public int Size { get; set; }
+        [Column]
+        public string LocationCountry { get; set; }
+        [Column]
+        public string CompanyName { get; set; }
     }
     internal class Program
     {
@@ -37,7 +67,8 @@ namespace Lab7
                 Console.WriteLine(t);
             Console.WriteLine();
         }
-        static void Main(string[] args)
+
+        public static void LINQToObject()
         {
             List<Client> clients = new List<Client>
             {
@@ -111,6 +142,76 @@ namespace Lab7
                        orderby cl.age ascending
                        select new { Client = cl.name, Age = cl.age };
             Print(res5);
+        }
+        public static void LINQToSQL()
+        {
+            Console.WriteLine("---------------------------------------");
+            string connectionString = @"Server = DESKTOP-TPNKBFP; Database = Lab1; Trusted_Connection = True; ";
+            DataContext db = new DataContext(connectionString);
+
+            Console.WriteLine("Однотабличный запрос на выборку\nКомпьютеры с кол-во ядер больше 4");
+            var zap1 = from pl in db.GetTable<ComputerTable>()
+                       where pl.NumberOfCores>=4
+                       select new { Id = pl.Id, Cores = pl.NumberOfCores };
+            Print(zap1);
+
+
+            Console.WriteLine("---------------------------------------");
+            Console.WriteLine("Многотабличный запрос на выборку\n");
+            var zap2 = from g in db.GetTable<ServerTable>()
+                       join dev in db.GetTable<ComputerTable>() on g.ComputerId equals dev.Id
+                       where dev.CoolType == "Oil"
+                       select new { Na = g.ServerName, Re = dev.Id, Nn = g.ValueOfComputers };
+            Print(zap2);
+
+
+            Console.WriteLine("---------------------------------------");
+            Console.WriteLine("\nЗапрос на добавление");
+            var country = "Moscow";
+            var id = from dev in db.GetTable<DataCenterTable>()
+                     select dev.Id;
+            int maxId = id.Max() + 1;
+
+            DataCenterTable newDev = new DataCenterTable()
+            {
+            //    Id = maxId,
+                Size = 5500,
+                CompanyName = "abcd",
+                CostofUsage = 90865,
+                LocationCountry = country
+            };
+            db.GetTable<DataCenterTable>().InsertOnSubmit(newDev);
+            db.SubmitChanges();
+            Console.WriteLine("Добавление завершено");
+
+
+            Console.WriteLine("---------------------------------------");
+            var change = db.GetTable<ComputerTable>().FirstOrDefault();
+            change.CoolType = "AA";
+            db.SubmitChanges();
+            Console.WriteLine("Изменение завершено");
+
+
+            //Console.WriteLine("---------------------------------------");
+            //var delete = db.GetTable<DeveloperTable>().Where(d => d.Devid == maxId).FirstOrDefault();
+            //db.GetTable<DeveloperTable>().DeleteOnSubmit(delete);
+            //db.SubmitChanges();
+            //Console.WriteLine("Элемент удален");
+
+            ///////////////////////////////////////////////////////////////////
+            /////
+            //// Получение доступа к данным, выполнчч только хранимую процедуру
+            //UserDataContext db1 = new UserDataContext(connectionString);
+            //int count = 0, avg = 0;
+            //string name = "Kira";
+            //db1.GetAgeRange(name, ref count, ref avg);
+            //Console.WriteLine("Для пользователей с именем {0} средний возраст: {1}, количество клиентов с этим именем: {2}", name, avg, count);
+
+            //Console.ReadKey();
+        }
+        static void Main(string[] args)
+        {
+            LINQToSQL();
         }
     }
 
