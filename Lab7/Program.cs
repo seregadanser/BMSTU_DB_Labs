@@ -67,6 +67,49 @@ namespace Lab7
                 Console.WriteLine(t);
             Console.WriteLine();
         }
+        static void ReadXML()
+        {
+            XDocument doc = XDocument.Load("t2.xml");
+            foreach (XElement el in doc.Elements("start"))
+            {
+                foreach (XElement el1 in el.Elements("Lab1.dbo.Computer"))
+                // XElement cid =;
+                {
+                    XAttribute cname = el1.Attribute("MemoryValue");
+                   // XElement csurname = el.Element("ClSurname");
+                    Console.WriteLine(cname);
+                }
+                //XElement cphone = el.Element("ClPhone");
+                //XElement cage = el.Element("ClAge");
+
+               
+          
+            }
+        }
+
+        static void UpdateXML()
+        {
+            XDocument doc = XDocument.Load("1.xml");
+            var root = doc.Elements("Row");
+            foreach (XElement el in root.Elements("row").ToList())
+            {
+                if (el.Element("ClId").Value == "2")
+                    el.Element("ClName").Value = "Nik";
+            }
+            doc.Save("update.xml");
+        }
+
+        static void AddXML()
+        {
+            XDocument doc = XDocument.Load("1.xml");
+            doc.Element("Row").Add(new XElement("row",
+                new XElement("ClId", "121"),
+                new XElement("ClName", "Sleep"),
+                new XElement("ClSurname", "Man"),
+                new XElement("ClPhone", "89250170813"),
+                new XElement("ClAge", "20")));
+            doc.Save("add.xml");
+        }
 
         public static void LINQToObject()
         {
@@ -192,26 +235,41 @@ namespace Lab7
             Console.WriteLine("Изменение завершено");
 
 
-            //Console.WriteLine("---------------------------------------");
-            //var delete = db.GetTable<DeveloperTable>().Where(d => d.Devid == maxId).FirstOrDefault();
-            //db.GetTable<DeveloperTable>().DeleteOnSubmit(delete);
-            //db.SubmitChanges();
-            //Console.WriteLine("Элемент удален");
+            Console.WriteLine("---------------------------------------");
+            var delete = db.GetTable<ComputerTable>().FirstOrDefault();
+            db.GetTable<ComputerTable>().DeleteOnSubmit(delete);
+            db.SubmitChanges();
+            Console.WriteLine("Элемент удален");
 
-            ///////////////////////////////////////////////////////////////////
-            /////
-            //// Получение доступа к данным, выполнчч только хранимую процедуру
-            //UserDataContext db1 = new UserDataContext(connectionString);
-            //int count = 0, avg = 0;
-            //string name = "Kira";
-            //db1.GetAgeRange(name, ref count, ref avg);
-            //Console.WriteLine("Для пользователей с именем {0} средний возраст: {1}, количество клиентов с этим именем: {2}", name, avg, count);
+            /////////////////////////////////////////////////////////////////
+            ///
+            // Получение доступа к данным, выполнчч только хранимую процедуру
+            UserDataContext db1 = new UserDataContext(connectionString);
+            Console.WriteLine(db1.GetAgeRange(1260, 3400));
 
             //Console.ReadKey();
         }
         static void Main(string[] args)
         {
-            LINQToSQL();
+        //    LINQToSQL();
+            ReadXML();
+        }
+    }
+    public class UserDataContext : DataContext
+    {
+        public UserDataContext(string connectionString)
+            : base(connectionString)
+        {
+
+        }
+
+        [Function(Name = "gcb")]
+        [return: Parameter(DbType = "Int")]
+        public int GetAgeRange([Parameter(Name = "a", DbType = "Int")] int a,
+            [Parameter(Name = "b", DbType = "Int")] int b)
+        {
+            IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), a,b);
+            return ((int)(result.ReturnValue));
         }
     }
 
