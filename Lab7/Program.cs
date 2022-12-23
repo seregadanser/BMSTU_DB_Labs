@@ -89,25 +89,27 @@ namespace Lab7
 
         static void UpdateXML()
         {
-            XDocument doc = XDocument.Load("1.xml");
-            var root = doc.Elements("Row");
-            foreach (XElement el in root.Elements("row").ToList())
+            XDocument doc = XDocument.Load("t2.xml");
+            foreach (XElement el in doc.Elements("start"))
             {
-                if (el.Element("ClId").Value == "2")
-                    el.Element("ClName").Value = "Nik";
+                foreach (XElement el1 in el.Elements("Lab1.dbo.Computer"))
+                {
+                    if (el1.Attribute("Id").Value == "1")
+                        el1.Attribute("MemoryValue").Value = "1";
+                }
             }
             doc.Save("update.xml");
         }
 
         static void AddXML()
         {
-            XDocument doc = XDocument.Load("1.xml");
-            doc.Element("Row").Add(new XElement("row",
-                new XElement("ClId", "121"),
-                new XElement("ClName", "Sleep"),
-                new XElement("ClSurname", "Man"),
-                new XElement("ClPhone", "89250170813"),
-                new XElement("ClAge", "20")));
+            XDocument doc = XDocument.Load("t2.xml");
+            doc.Element("start").Add(new XElement("Lab1.dbo.Computer",
+                new XAttribute("MemoryValue", "121"),
+                new XAttribute("Id", "1002"),
+                new XAttribute("Furency", "9"),
+                new XAttribute("CoolType", "Fan"),
+                new XAttribute("NumberOfCores", "20")));
             doc.Save("add.xml");
         }
 
@@ -189,7 +191,7 @@ namespace Lab7
         public static void LINQToSQL()
         {
             Console.WriteLine("---------------------------------------");
-            string connectionString = @"Server = DESKTOP-TPNKBFP; Database = Lab1; Trusted_Connection = True; ";
+            string connectionString = @"Server = LAPTOPSERGEY; Database = Lab1; Trusted_Connection = True; ";
             DataContext db = new DataContext(connectionString);
 
             Console.WriteLine("Однотабличный запрос на выборку\nКомпьютеры с кол-во ядер больше 4");
@@ -241,9 +243,7 @@ namespace Lab7
             db.SubmitChanges();
             Console.WriteLine("Элемент удален");
 
-            /////////////////////////////////////////////////////////////////
-            ///
-            // Получение доступа к данным, выполнчч только хранимую процедуру
+       
             UserDataContext db1 = new UserDataContext(connectionString);
             Console.WriteLine(db1.GetAgeRange(1260, 3400));
 
@@ -253,6 +253,8 @@ namespace Lab7
         {
         //    LINQToSQL();
             ReadXML();
+            UpdateXML();
+            AddXML();
         }
     }
     public class UserDataContext : DataContext

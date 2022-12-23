@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Labs\\DataBase\\Lab7\\Lab7.csproj": {}
+    "D:\\Study\\DataBase\\Lab7\\Lab7.csproj": {}
   },
   "projects": {
-    "D:\\Labs\\DataBase\\Lab7\\Lab7.csproj": {
+    "D:\\Study\\DataBase\\Lab7\\Lab7.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Labs\\DataBase\\Lab7\\Lab7.csproj",
+        "projectUniqueName": "D:\\Study\\DataBase\\Lab7\\Lab7.csproj",
         "projectName": "Lab7",
-        "projectPath": "D:\\Labs\\DataBase\\Lab7\\Lab7.csproj",
+        "projectPath": "D:\\Study\\DataBase\\Lab7\\Lab7.csproj",
         "packagesPath": "C:\\Users\\kalas\\.nuget\\packages\\",
-        "outputPath": "D:\\Labs\\DataBase\\Lab7\\obj\\",
+        "outputPath": "D:\\Study\\DataBase\\Lab7\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kalas\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -61,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

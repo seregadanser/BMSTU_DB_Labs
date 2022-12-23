@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4CRQnX0Zkc4EJMlx0TUJHQjxzffdoVWK5M5jBTlLSns65oh5ahnfThPSq/qOhdsQZMEoHEXTw3XFzAHjc2EP+Q==",
+  "dgSpecHash": "k8tkTQSGBW4xdPDfTom5MlkTVMLVGVDodcgxO4INSMzg4tsDqdhABi2t7rSQ4K0Sj5fHn8Sv5G5jwzjwGJsOkw==",
   "success": true,
-  "projectFilePath": "D:\\Labs\\DataBase\\Lab7\\Lab7.csproj",
+  "projectFilePath": "D:\\Study\\DataBase\\Lab7\\Lab7.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kalas\\.nuget\\packages\\castle.core\\4.3.1\\castle.core.4.3.1.nupkg.sha512",
     "C:\\Users\\kalas\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
