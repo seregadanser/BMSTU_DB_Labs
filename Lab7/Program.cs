@@ -251,10 +251,10 @@ namespace Lab7
         }
         static void Main(string[] args)
         {
-        //    LINQToSQL();
-            ReadXML();
-            UpdateXML();
-            AddXML();
+            LINQToSQL();
+           // ReadXML();
+            //UpdateXML();
+            //AddXML();
         }
     }
     public class UserDataContext : DataContext
